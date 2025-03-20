@@ -1,9 +1,20 @@
-* {
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+:root {
+  color-scheme: dark;
 }
 
-body { 
-    background-color: rgb(53, 52, 52);
-    color: white;
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(53, 52, 52);
+}
+
+body {
+  color: white;
+  text-align: center;
+}
+
+input,
+button {
+  border-style: solid;
+  border-radius: 5px;
 }
