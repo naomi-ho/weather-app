@@ -1,3 +1,6 @@
+const form = document.getElementById('locationForm');
+const locationInput = document.getElementById('location');
+
 // takes location and returns weather data for that location
 async function getJson(location) {
   try {
@@ -35,3 +38,11 @@ async function processJson(location) {
     return null;
   }
 }
+
+// event listener for form submit button to fetch weather info
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  console.log(locationInput.value);
+  processJson(locationInput.value);
+});

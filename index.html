@@ -1,13 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Weather</h1>
-</body>
+    <form id="locationForm" action="#">
+      <label for="location">Enter location:</label>
+      <input
+        type="text"
+        id="location"
+        name="location"
+        placeholder="e.g. New York"
+        required
+      />
+      <button type="submit">Search</button>
+    </form>
+  </body>
 </html>
