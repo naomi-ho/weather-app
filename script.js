@@ -45,4 +45,7 @@ form.addEventListener('submit', (e) => {
 
   console.log(locationInput.value);
   processJson(locationInput.value);
+
+  // clears search bar after submission
+  locationInput.value = null;
 });
