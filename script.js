@@ -27,7 +27,10 @@ async function processJson(location) {
 
     const processedData = {
       location: city,
-      currentConditions: currentConditions,
+      currentTemp: currentConditions.temp,
+      currentDescription: currentConditions.conditions,
+      currentMax: forecast[0].tempmax,
+      currentMin: forecast[0].tempmin,
       forecast: forecast,
     };
 
@@ -40,12 +43,46 @@ async function processJson(location) {
 }
 
 // event listener for form submit button to fetch weather info
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
-
-  console.log(locationInput.value);
-  processJson(locationInput.value);
+  const data = await processJson(locationInput.value); // stores processed API result
+  if (data) {
+    displayCurrent(data);
+  }
 
   // clears search bar after submission
-  locationInput.value = null;
+  locationInput.value = '';
 });
+
+// display current conditions (location, conditions, temp) + forecast[0] (tempmax, tempmin)
+function displayCurrent(data) {
+  const currentContainer = document.getElementById('current');
+  currentContainer.innerHTML = '';
+  currentContainer.id = 'currentDiv';
+
+  // location
+  const location = document.createElement('h3');
+  location.textContent = data.location;
+  currentContainer.appendChild(location);
+
+  // temp
+  const temp = document.createElement('h2');
+  temp.textContent = `${data.currentTemp}°`;
+  currentContainer.appendChild(temp);
+
+  // condition
+  const condition = document.createElement('p');
+  condition.textContent = data.currentDescription;
+  currentContainer.appendChild(condition);
+
+  // high and low
+  const tempRange = document.createElement('div');
+  const tempMax = document.createElement('span');
+  tempMax.textContent = `H: ${data.currentMax}°`;
+  const tempMin = document.createElement('span');
+  tempMin.textContent = `L: ${data.currentMin}°`;
+  tempMin.style.paddingLeft = '10px';
+  tempRange.appendChild(tempMax);
+  tempRange.appendChild(tempMin);
+  currentContainer.appendChild(tempRange);
+}

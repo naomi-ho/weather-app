@@ -12,21 +12,25 @@
 
 body {
   box-sizing: border-box;
-  font-size: 1.6rem;
   font-family: 'Inter', sans-serif;
   background-color: #1e201e;
   color: #5ccc37;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
 }
 
 header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 20px;
+  padding-bottom: 40px;
+  width: 100vw;
 }
 
 header h1 {
-  font-size: 30px;
+  font-size: 1.6rem;
 }
 
 form {
@@ -58,4 +62,24 @@ button {
   width: 1.6rem;
   height: 1.6rem;
   cursor: pointer;
+}
+
+#currentDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#currentDiv > h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+
+#currentDiv > h3 {
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+#currentDiv > p {
+  font-style: italic;
 }
