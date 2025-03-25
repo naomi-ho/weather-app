@@ -5,7 +5,7 @@ const locationInput = document.getElementById('location');
 async function getJson(location) {
   try {
     const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=M6CKQHBJXEU36CWG263963LNU`,
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=M6CKQHBJXEU36CWG263963LNU&in`,
       { mode: 'cors' },
     );
     const json = await response.json();
@@ -48,6 +48,7 @@ form.addEventListener('submit', async (e) => {
   const data = await processJson(locationInput.value); // stores processed API result
   if (data) {
     displayCurrent(data);
+    displayToday(data);
   }
 
   // clears search bar after submission
@@ -85,4 +86,55 @@ function displayCurrent(data) {
   tempRange.appendChild(tempMax);
   tempRange.appendChild(tempMin);
   currentContainer.appendChild(tempRange);
+}
+
+// display today's description and hourly temp with icon
+function displayToday(data) {
+  const detailsContainer = document.getElementById('details');
+  detailsContainer.innerHTML = '';
+  detailsContainer.id = 'detailsDiv';
+
+  // today's description
+  const todayDescription = document.createElement('p');
+  todayDescription.textContent = data.forecast[0].description;
+  detailsContainer.appendChild(todayDescription);
+
+  // hourly weather
+  const todayContainer = document.createElement('div');
+  const hourlyWeather = data.forecast[0].hours;
+  console.log(hourlyWeather);
+
+  for (let i = 0; i < hourlyWeather.length; i++) {
+    const hourDiv = document.createElement('div');
+    hourDiv.className = 'hourDiv';
+
+    let displayTime;
+
+    // convert to 12 hour format
+    if (i === 0) {
+      displayTime = '12 AM';
+    } else if (i < 12) {
+      displayTime = `${i} AM`;
+    } else if (i === 12) {
+      displayTime = '12 PM';
+    } else {
+      displayTime = `${i - 12} PM`;
+    }
+
+    const time = document.createElement('p');
+    time.textContent = displayTime;
+    hourDiv.appendChild(time);
+
+    const icon = document.createElement('p');
+    icon.textContent = hourlyWeather[i].icon;
+    hourDiv.appendChild(icon);
+
+    const temp = document.createElement('p');
+    temp.textContent = `${hourlyWeather[i].temp}°`;
+    hourDiv.appendChild(temp);
+
+    todayContainer.appendChild(hourDiv);
+  }
+
+  detailsContainer.appendChild(todayContainer);
 }
