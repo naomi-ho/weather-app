@@ -1,3 +1,5 @@
+import '../style.css';
+
 const form = document.getElementById('locationForm');
 const locationInput = document.getElementById('location');
 
