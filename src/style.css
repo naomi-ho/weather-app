@@ -1,5 +1,7 @@
 :root {
   color-scheme: dark;
+  --green: #5ccc37;
+  --radius: 5px;
 }
 
 *,
@@ -12,9 +14,9 @@
 
 body {
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: #1e201e;
-  color: #5ccc37;
+  color: var(--green);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -25,7 +27,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding-bottom: 40px;
+  margin-bottom: 40px;
   width: 100vw;
 }
 
@@ -35,7 +37,7 @@ header h1 {
 
 form {
   border-style: solid;
-  border-radius: 5px;
+  border-radius: var(--radius);
   padding: 5px;
   display: flex;
   align-items: center;
@@ -53,8 +55,8 @@ input {
   height: 1.6rem;
   font-size: 14px;
   padding: 0 5px 0;
-  color: #5ccc37;
-  font-family: 'Inter', sans-serif;
+  color: var(--green);
+  font-family: "Inter", sans-serif;
 }
 
 button {
@@ -68,6 +70,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 #currentDiv > h2 {
@@ -82,4 +85,82 @@ button {
 
 #currentDiv > p {
   font-style: italic;
+}
+
+#detailsDiv {
+  display: flex;
+  flex-direction: column;
+  min-width: 800px;
+  max-width: 50vw;
+  padding: 10px;
+}
+
+#detailsDiv {
+  border-style: solid;
+  border-radius: var(--radius);
+}
+
+#todaysDescription {
+  padding-bottom: 10px;
+  text-align: center;
+  border-style: none none solid none;
+}
+
+#todayContainer {
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  text-align: center;
+}
+
+.div0 {
+  grid-area: 2 / 1 / 3 / 2;
+}
+.div1 {
+  grid-area: 2 / 1 / 3 / 15;
+}
+.div2 {
+  grid-area: 2 / 1 / 3 / 2;
+}
+.div3 {
+  grid-area: 2 / 2 / 3 / 3;
+}
+.div4 {
+  grid-area: 2 / 3 / 3 / 4;
+}
+.div5 {
+  grid-area: 2 / 4 / 3 / 5;
+}
+.div6 {
+  grid-area: 2 / 5 / 3 / 6;
+}
+.div7 {
+  grid-area: 2 / 6 / 3 / 7;
+}
+.div8 {
+  grid-area: 2 / 7 / 3 / 8;
+}
+.div9 {
+  grid-area: 2 / 8 / 3 / 9;
+}
+.div10 {
+  grid-area: 2 / 9 / 3 / 10;
+}
+.div11 {
+  grid-area: 2 / 10 / 3 / 11;
+}
+.div12 {
+  grid-area: 2 / 11 / 3 / 12;
+}
+.div13 {
+  grid-area: 2 / 12 / 3 / 13;
+}
+.div14 {
+  grid-area: 2 / 13 / 3 / 14;
+}
+.div15 {
+  grid-area: 2 / 14 / 3 / 15;
 }

@@ -38,18 +38,21 @@ export function displayToday(data) {
   detailsContainer.id = "detailsDiv"
 
   // today's description
-  const todayDescription = document.createElement("p")
+  const todayDescription = document.createElement("div")
+  todayDescription.id = "todaysDescription"
   todayDescription.textContent = data.forecast[0].description
   detailsContainer.appendChild(todayDescription)
 
   // hourly weather
   const todayContainer = document.createElement("div")
+  todayContainer.id = "todayContainer"
   const hourlyWeather = data.forecast[0].hours
   console.log(hourlyWeather)
 
   for (let i = 0; i < hourlyWeather.length; i++) {
     const hourDiv = document.createElement("div")
     hourDiv.className = "hourDiv"
+    hourDiv.id = `hourDiv${i}`
 
     let displayTime
 
