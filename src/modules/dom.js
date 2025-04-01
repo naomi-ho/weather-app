@@ -1,8 +1,11 @@
+import rain from "../assets/icons/rain.svg"
+
+const contentContainer = document.getElementById("content")
+
 // display current conditions (location, conditions, temp) + forecast[0] (tempmax, tempmin)
 export function displayCurrent(data) {
-  const currentContainer = document.getElementById("current")
-  currentContainer.innerHTML = ""
-  currentContainer.id = "currentDiv"
+  const currentContainer = document.createElement("div")
+  currentContainer.id = "current"
 
   // location
   const location = document.createElement("h3")
@@ -29,13 +32,14 @@ export function displayCurrent(data) {
   tempRange.appendChild(tempMax)
   tempRange.appendChild(tempMin)
   currentContainer.appendChild(tempRange)
+
+  contentContainer.appendChild(currentContainer)
 }
 
 // display today's description and hourly temp with icon
 export function displayToday(data) {
-  const detailsContainer = document.getElementById("details")
-  detailsContainer.innerHTML = ""
-  detailsContainer.id = "detailsDiv"
+  const detailsContainer = document.createElement("div")
+  detailsContainer.id = "details"
 
   // today's description
   const todayDescription = document.createElement("div")
@@ -71,8 +75,10 @@ export function displayToday(data) {
     time.textContent = displayTime
     hourDiv.appendChild(time)
 
-    const icon = document.createElement("p")
-    icon.textContent = hourlyWeather[i].icon
+    const icon = document.createElement("img")
+    icon.id = "iconImg"
+    icon.src = replaceIcon(hourlyWeather[i].icon)
+    icon.height = 23
     hourDiv.appendChild(icon)
 
     const temp = document.createElement("p")
@@ -83,4 +89,15 @@ export function displayToday(data) {
   }
 
   detailsContainer.appendChild(todayContainer)
+  contentContainer.appendChild(detailsContainer)
+}
+
+// replace weather icon text with corresponding svg
+function replaceIcon(icon) {
+  console.log(icon)
+  if (icon === "rain") {
+    return rain
+  } else {
+    return rain
+  }
 }

@@ -66,28 +66,28 @@ button {
   cursor: pointer;
 }
 
-#currentDiv {
+#current {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
 }
 
-#currentDiv > h2 {
+#current > h2 {
   font-size: 2.5rem;
   font-weight: 300;
 }
 
-#currentDiv > h3 {
+#current > h3 {
   font-size: 1.2rem;
   font-weight: 300;
 }
 
-#currentDiv > p {
+#current > p {
   font-style: italic;
 }
 
-#detailsDiv {
+#details {
   display: flex;
   flex-direction: column;
   min-width: 800px;
@@ -95,7 +95,7 @@ button {
   padding: 10px;
 }
 
-#detailsDiv {
+#details {
   border-style: solid;
   border-radius: var(--radius);
 }
