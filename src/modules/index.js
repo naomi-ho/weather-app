@@ -1,5 +1,5 @@
 import "../style.css"
-import { displayCurrent, displayToday } from "./dom"
+import { displayCurrent, displayToday, displayForecast } from "./dom"
 import { processJson } from "./api"
 
 const form = document.getElementById("locationForm")
@@ -13,6 +13,7 @@ form.addEventListener("submit", async (e) => {
   contentContainer.innerHTML = ""
   displayCurrent(data)
   displayToday(data)
+  displayForecast(data)
 
   // clears search bar after submission
   locationInput.value = ""
