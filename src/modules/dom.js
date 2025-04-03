@@ -2,6 +2,22 @@ import { icons } from "./icons"
 
 const contentContainer = document.getElementById("content")
 
+// determine day of the week
+function determineDoW(datetime) {
+  // splits string whenever it finds -, T, or :
+  const parts = datetime.split(/[-T:]/)
+
+  const year = parseInt(parts[0])
+  const monthJS = parseInt(parts[1]) - 1 // months are 0-indexed in JS
+  const day = parseInt(parts[2])
+
+  // create date in local timezone (not UTC)
+  const date = new Date(year, monthJS, day)
+
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+  return days[date.getDay()]
+}
+
 // display current conditions (location, conditions, temp) + forecast[0] (tempmax, tempmin)
 export function displayCurrent(data) {
   const currentContainer = document.createElement("div")
@@ -78,7 +94,7 @@ export function displayToday(data) {
     const icon = document.createElement("img")
     icon.id = "iconImg"
     icon.src = replaceIcon(hourlyWeather[i].icon)
-    icon.height = 12
+    icon.height = 15
     hourDiv.appendChild(icon)
 
     const temp = document.createElement("p")
@@ -103,77 +119,69 @@ function replaceIcon(iconName) {
 
 // display forecast (day of the week, icon, tempmin/tempmax, preciptype, precipprob, windspeed)
 export function displayForecast(data) {
+  const forecastDiv = document.createElement("div")
+  forecastDiv.id = "forecast"
+
+  const forecastDescription = document.createElement("div")
+  forecastDescription.id = "forecastDescription"
+  forecastDescription.textContent = "Forecast"
+  forecastDiv.appendChild(forecastDescription)
+
   const forecastContainer = document.createElement("div")
-  forecastContainer.id = "details"
+  forecastContainer.id = "forecastCont"
 
   for (let i = 0; i < data.forecast.length; i++) {
     const dayContainer = document.createElement("div")
     dayContainer.className = "dayContainer"
 
-    // day of the week and date
+    // day of the week
     const day = document.createElement("p")
     day.id = "day"
     day.textContent = determineDoW(data.forecast[i].datetime)
     dayContainer.appendChild(day)
 
+    // icon
+    const icon = document.createElement("img")
+    icon.id = "iconImg"
+    icon.src = replaceIcon(data.forecast[i].icon)
+    icon.height = 18
+    dayContainer.appendChild(icon)
+
+    // temp
+    const temp = document.createElement("p")
+    temp.textContent = `${Math.round(data.forecast[i].tempmin)}° / ${Math.round(data.forecast[i].tempmax)}°`
+    dayContainer.appendChild(temp)
+
+    // preciptype
+    if (data.forecast[i].preciptype === null) {
+      const preciptype = document.createElement("img")
+      preciptype.src = replaceIcon("rain")
+      preciptype.height = 18
+      dayContainer.appendChild(preciptype)
+    } else {
+      const preciptype = document.createElement("img")
+      preciptype.src = replaceIcon(data.forecast[i].preciptype)
+      preciptype.height = 18
+      dayContainer.appendChild(preciptype)
+    }
+
+    // precipprob
+    const precipprob = document.createElement("p")
+    precipprob.textContent = `${Math.round(data.forecast[i].precipprob)}%`
+    dayContainer.appendChild(precipprob)
+
+    // wind icon
+    const windicon = document.createElement("img")
+    windicon.src = replaceIcon("wind")
+    windicon.height = 18
+    dayContainer.appendChild(windicon)
+    // wind speed
+    const windspeed = document.createElement("p")
+    windspeed.textContent = `${Math.round(data.forecast[i].windspeed)} mph`
+    dayContainer.appendChild(windspeed)
+
     forecastContainer.appendChild(dayContainer)
-
-    // // hourly weather
-    // const todayContainer = document.createElement("div")
-    // todayContainer.id = "todayContainer"
-    // const hourlyWeather = data.forecast[0].hours
-
-    // for (let i = 0; i < hourlyWeather.length; i++) {
-    //   const hourDiv = document.createElement("div")
-    //   hourDiv.className = "hourDiv"
-    //   hourDiv.id = `hourDiv${i}`
-
-    //   let displayTime
-
-    //   // convert to 12 hour format
-    //   if (i === 0) {
-    //     displayTime = "12AM"
-    //   } else if (i < 12) {
-    //     displayTime = `${i}AM`
-    //   } else if (i === 12) {
-    //     displayTime = "12 PM"
-    //   } else {
-    //     displayTime = `${i - 12}PM`
-    //   }
-
-    //   const time = document.createElement("p")
-    //   time.id = "time"
-    //   time.textContent = displayTime
-    //   hourDiv.appendChild(time)
-
-    //   const icon = document.createElement("img")
-    //   icon.id = "iconImg"
-    //   icon.src = replaceIcon(hourlyWeather[i].icon)
-    //   icon.height = 12
-    //   hourDiv.appendChild(icon)
-
-    //   const temp = document.createElement("p")
-    //   temp.textContent = `${hourlyWeather[i].temp}°`
-    //   hourDiv.appendChild(temp)
-
-    //   todayContainer.appendChild(hourDiv)
-    // }
   }
-
-  contentContainer.appendChild(forecastContainer)
-}
-
-function determineDoW(datetime) {
-  // splits string whenever it finds -, T, or :
-  const parts = datetime.split(/[-T:]/)
-
-  const year = parseInt(parts[0])
-  const monthJS = parseInt(parts[1]) - 1 // months are 0-indexed in JS
-  const day = parseInt(parts[2])
-
-  // create date in local timezone (not UTC)
-  const date = new Date(year, monthJS, day)
-
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-  return days[date.getDay()]
+  forecastDiv.appendChild(forecastContainer)
+  contentContainer.appendChild(forecastDiv)
 }

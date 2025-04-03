@@ -87,20 +87,23 @@ button {
   font-style: italic;
 }
 
-#details {
+#details,
+#forecast {
   display: flex;
   flex-direction: column;
   min-width: 800px;
   max-width: 50vw;
   padding: 10px;
-}
-
-#details {
   border-style: solid;
   border-radius: var(--radius);
 }
 
-#todaysDescription {
+#details {
+  margin-bottom: 20px;
+}
+
+#todaysDescription,
+#forecastDescription {
   padding-bottom: 10px;
   text-align: center;
   border-style: none none solid none;
@@ -116,5 +119,23 @@ button {
 }
 
 .hourDiv {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.dayContainer {
+  display: flex;
+  gap: 10px;
+  width: auto;
+  align-self: stretch;
+  justify-content: space-between;
+}
+
+#forecastCont {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  align-items: center;
   font-size: 0.95rem;
 }
