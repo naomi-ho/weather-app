@@ -137,7 +137,11 @@ export function displayForecast(data) {
     // day of the week
     const day = document.createElement("p")
     day.id = "day"
-    day.textContent = determineDoW(data.forecast[i].datetime)
+    if (i === 0) {
+      day.textContent = "Today"
+    } else {
+      day.textContent = determineDoW(data.forecast[i].datetime)
+    }
     dayContainer.appendChild(day)
 
     // icon
