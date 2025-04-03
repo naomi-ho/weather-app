@@ -1,4 +1,4 @@
-import rain from "../assets/icons/rain.svg"
+import { icons } from "./icons"
 
 const contentContainer = document.getElementById("content")
 
@@ -62,23 +62,24 @@ export function displayToday(data) {
 
     // convert to 12 hour format
     if (i === 0) {
-      displayTime = "12 AM"
+      displayTime = "12AM"
     } else if (i < 12) {
-      displayTime = `${i} AM`
+      displayTime = `${i}AM`
     } else if (i === 12) {
       displayTime = "12 PM"
     } else {
-      displayTime = `${i - 12} PM`
+      displayTime = `${i - 12}PM`
     }
 
     const time = document.createElement("p")
+    time.id = "time"
     time.textContent = displayTime
     hourDiv.appendChild(time)
 
     const icon = document.createElement("img")
     icon.id = "iconImg"
     icon.src = replaceIcon(hourlyWeather[i].icon)
-    icon.height = 23
+    icon.height = 12
     hourDiv.appendChild(icon)
 
     const temp = document.createElement("p")
@@ -93,11 +94,10 @@ export function displayToday(data) {
 }
 
 // replace weather icon text with corresponding svg
-function replaceIcon(icon) {
-  console.log(icon)
-  if (icon === "rain") {
-    return rain
-  } else {
-    return rain
+function replaceIcon(iconName) {
+  for (const icon in icons) {
+    if (`${iconName}.svg` === icon) {
+      return icons[icon]
+    }
   }
 }
