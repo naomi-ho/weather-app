@@ -171,7 +171,7 @@ export function displayForecast(data) {
       precip.appendChild(preciptype)
     } else {
       const preciptype = document.createElement("img")
-      preciptype.src = replaceIcon(data.forecast[i].preciptype)
+      preciptype.src = replaceIcon(data.forecast[i].preciptype[0])
       preciptype.height = 18
       precip.appendChild(preciptype)
     }

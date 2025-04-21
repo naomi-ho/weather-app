@@ -306,3 +306,9 @@ button:hover {
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
+
+.error-state {
+  text-align: center;
+  padding: 20px;
+  color: #ff6b6b;
+}
