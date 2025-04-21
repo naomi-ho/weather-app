@@ -1,7 +1,13 @@
 :root {
   color-scheme: dark;
   --green: #5ccc37;
+  --green-light: rgba(92, 204, 55, 0.8);
+  --green-dark: #3a8a24;
   --radius: 5px;
+  --gap-sm: 10px;
+  --gap-md: 15px;
+  --gap-lg: 20px;
+  --container-padding: 15px;
 }
 
 *,
@@ -20,122 +26,227 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 20px;
+  padding: var(--gap-lg);
+  min-height: 100vh;
 }
 
 header {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 40px;
-  width: 100vw;
+  width: 100%;
+  max-width: 800px;
+  padding: 0 var(--container-padding);
 }
 
 header h1 {
   font-size: 1.6rem;
+  font-weight: 500;
 }
 
 form {
-  border-style: solid;
+  border: 1px solid var(--green);
   border-radius: var(--radius);
   padding: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 5px;
+  gap: var(--gap-sm);
+  transition: all 0.2s ease;
+}
+
+form:focus-within {
+  box-shadow: 0 0 0 2px var(--green-light);
 }
 
 input,
 button {
   border-style: none;
+  background: transparent;
 }
 
 input {
   width: 170px;
   height: 1.6rem;
-  font-size: 14px;
-  padding: 0 5px 0;
+  font-size: 0.9rem;
+  padding: 0 5px;
   color: var(--green);
-  font-family: "Inter", sans-serif;
+  font-family: inherit;
+}
+
+input::placeholder {
+  color: var(--green-dark);
+}
+
+input:focus {
+  outline: none;
 }
 
 button {
-  background: none;
   width: 1.6rem;
   height: 1.6rem;
   cursor: pointer;
+  color: var(--green);
+  transition: transform 0.2s ease;
 }
 
+button:hover {
+  transform: scale(1.1);
+}
+
+#content {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+}
+
+/* Current Weather Section */
 #current {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  gap: var(--gap-sm);
+  text-align: center;
 }
 
 #current > h2 {
   font-size: 2.5rem;
   font-weight: 300;
+  line-height: 1;
 }
 
 #current > h3 {
   font-size: 1.2rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 #current > p {
   font-style: italic;
+  color: var(--green-light);
 }
 
+#current div {
+  display: flex;
+  gap: var(--gap-sm);
+  font-size: 0.95rem;
+}
+
+/* Today's Weather Section */
 #details,
 #forecast {
-  display: flex;
-  flex-direction: column;
-  min-width: 800px;
-  max-width: 50vw;
-  padding: 10px;
-  border-style: solid;
+  width: 100%;
+  border: 1px solid var(--green);
   border-radius: var(--radius);
-}
-
-#details {
-  margin-bottom: 20px;
+  padding: var(--container-padding);
+  background-color: rgba(30, 32, 30, 0.7);
 }
 
 #todaysDescription,
 #forecastDescription {
-  padding-bottom: 10px;
+  padding-bottom: var(--gap-sm);
+  margin-bottom: var(--gap-sm);
   text-align: center;
-  border-style: none none solid none;
+  border-bottom: 1px solid var(--green);
+}
+
+#todaysDescription {
+  font-style: italic;
+  color: var(--green-light);
 }
 
 #todayContainer {
-  padding-top: 10px;
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-row-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: var(--gap-md);
   text-align: center;
+  padding-top: var(--gap-sm);
 }
 
 .hourDiv {
-  font-size: 0.95rem;
-  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+#time {
+  color: var(--green-light);
+}
+
+/* Forecast Section */
+#forecastCont {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--gap-md);
 }
 
 .dayContainer {
   display: flex;
-  gap: 10px;
-  width: auto;
-  align-self: stretch;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-sm);
+  padding: var(--gap-sm);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius);
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
 }
 
-#forecastCont {
+.dayContainer:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.day {
+  font-weight: 500;
+}
+
+.temp {
+  font-weight: 300;
+}
+
+.precipContainer,
+.windContainer {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 10px;
   align-items: center;
-  font-size: 0.95rem;
+  gap: 5px;
+}
+
+.precipProb,
+.windSpeed {
+  font-size: 0.8rem;
+  color: var(--green-light);
+}
+
+.iconImg {
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+  width: auto;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+
+  #todayContainer {
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    font-size: 0.8rem;
+  }
+
+  .hourDiv {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #forecastCont {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
 }

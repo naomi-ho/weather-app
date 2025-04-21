@@ -136,7 +136,7 @@ export function displayForecast(data) {
 
     // day of the week
     const day = document.createElement("p")
-    day.id = "day"
+    day.className = "day"
     if (i === 0) {
       day.textContent = "Today"
     } else {
@@ -146,43 +146,63 @@ export function displayForecast(data) {
 
     // icon
     const icon = document.createElement("img")
-    icon.id = "iconImg"
+    icon.className = "iconImg"
     icon.src = replaceIcon(data.forecast[i].icon)
     icon.height = 18
     dayContainer.appendChild(icon)
 
     // temp
     const temp = document.createElement("p")
+    temp.className = "temp"
     temp.textContent = `${Math.round(data.forecast[i].tempmin)}° / ${Math.round(data.forecast[i].tempmax)}°`
     dayContainer.appendChild(temp)
 
+    // precipitation container
+    const precipContainer = document.createElement("div")
+    precipContainer.className = "precipContainer"
+
     // preciptype
+    const precip = document.createElement("div")
+    precip.className = "precip"
     if (data.forecast[i].preciptype === null) {
       const preciptype = document.createElement("img")
       preciptype.src = replaceIcon("rain")
       preciptype.height = 18
-      dayContainer.appendChild(preciptype)
+      precip.appendChild(preciptype)
     } else {
       const preciptype = document.createElement("img")
       preciptype.src = replaceIcon(data.forecast[i].preciptype)
       preciptype.height = 18
-      dayContainer.appendChild(preciptype)
+      precip.appendChild(preciptype)
     }
+    precipContainer.appendChild(precip)
 
     // precipprob
     const precipprob = document.createElement("p")
+    precipprob.className = "precipProb"
     precipprob.textContent = `${Math.round(data.forecast[i].precipprob)}%`
-    dayContainer.appendChild(precipprob)
+    precipContainer.appendChild(precipprob)
+    dayContainer.appendChild(precipContainer)
+
+    // wind container
+    const windContainer = document.createElement("div")
+    windContainer.className = "windContainer"
 
     // wind icon
+    const wind = document.createElement("div")
+    wind.className = "wind"
     const windicon = document.createElement("img")
     windicon.src = replaceIcon("wind")
-    windicon.height = 18
-    dayContainer.appendChild(windicon)
+    windicon.height = 13
+    wind.appendChild(windicon)
+    windContainer.appendChild(wind)
+
     // wind speed
     const windspeed = document.createElement("p")
+    windspeed.className = "windSpeed"
     windspeed.textContent = `${Math.round(data.forecast[i].windspeed)} mph`
-    dayContainer.appendChild(windspeed)
+    windContainer.appendChild(windspeed)
+    dayContainer.appendChild(windContainer)
 
     forecastContainer.appendChild(dayContainer)
   }
