@@ -228,7 +228,7 @@ button:hover {
   width: auto;
 }
 
-/* Responsive Adjustments */
+/* responsive adjustments */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
@@ -249,4 +249,60 @@ button:hover {
   #forecastCont {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
+}
+
+.toggleContainer {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: fit-content;
+  border: 1px solid var(--green);
+  border-radius: var(--radius);
+  background: #1e201e;
+  font-weight: bold;
+  color: #1e201e;
+  cursor: pointer;
+}
+.toggleContainer::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  left: 0%;
+  border-radius: 3px;
+  background: var(--green);
+  transition: all 0.3s;
+}
+.toggleCheckbox:checked + .toggleContainer::before {
+  left: 50%;
+}
+.toggleContainer div {
+  padding: 6px;
+  text-align: center;
+  z-index: 1;
+}
+.toggleCheckbox {
+  display: none;
+}
+.toggleCheckbox:checked + .toggleContainer div:first-child {
+  color: var(--green);
+  transition: color 0.3s;
+}
+.toggleCheckbox:checked + .toggleContainer div:last-child {
+  color: #1e201e;
+  transition: color 0.3s;
+}
+.toggleCheckbox + .toggleContainer div:first-child {
+  color: #1e201e;
+  transition: color 0.3s;
+}
+.toggleCheckbox + .toggleContainer div:last-child {
+  color: var(--green);
+  transition: color 0.3s;
+}
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
